@@ -1,4 +1,3 @@
-import {parseKindName} from 'xelf/knd'
 import {scan} from 'xelf/ast'
 import {Type, parseType} from 'xelf/typ'
 
@@ -57,7 +56,7 @@ export function modelType(m:Model):Type {
 	const params = m.elems.map(el => {
 		return {name:el.key.toLowerCase(), typ:el.type}
 	})
-	return {kind:m.kind, id:0, body:{name:m.qname, params}}
+	return {kind:m.kind, id:0, ref:m.qname, body:{params}}
 }
 export interface ElemOpt {
 	name?:string
@@ -88,7 +87,8 @@ export function makeModel(opt:ModelOpt):Model {
 	const key = name.toLowerCase()
 	const schema = opt.schema||''
 	const qname = schema+'.'+name
-	const kind = parseKindName(opt.kind||'obj')
+	const t = parseType(scan(opt.kind||'<obj>'))
+	const kind = t.kind
 	return {name, vers:"", schema, key, qname, kind, elems:opt.elems.map(makeElem), object, extra}
 }
 export interface SchemaOpt {
