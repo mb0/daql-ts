@@ -13,9 +13,9 @@ with less layers, but failed...
  2. Meta layer to have a known and checked form definitions
     We want to use form lists with multiple instance of the same definition
  3. Form layer to actually manage values and editing
-    Well thats the meat of a form library
+    Well thats the meat of a form library. Nested forms with change tracking per form.
  4. Widget layer to render the user interface
-    We might want to use differnt view layer at some point
+    We might want to use differnt view layer at some point or have custom widgets.
 
 It is obvious from the reasoning that the last two layers can merged at the cost of the generic
 design ambition. Then again - we want some common API to manage values apart from the view
@@ -40,3 +40,5 @@ list of fields. It can hold a number of forms, each with its fields grouped into
 A layout provides a way to easily group, decorate form elements and inject additions into the
 resulting user interface.
 
+The form args meta and elements should provide an concrete, configurable and extensible form system.
+While the widget layer should be simple interfaces with some default mithril widgets.
